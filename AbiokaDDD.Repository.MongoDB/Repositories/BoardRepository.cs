@@ -5,7 +5,10 @@ using System;
 
 namespace AbiokaDDD.Repository.MongoDB.Repositories
 {
-    public class BoardRepository : MongoDBRepository<Board, BoardMongoDB, Guid>, IBoardRepository
+    internal class BoardRepository : MongoDBRepository<Board, BoardMongoDB, Guid>, IBoardRepository
     {
+        public BoardRepository(IMongoDBContext mongoDBContext)
+            : base(mongoDBContext) {
+        }
     }
 }

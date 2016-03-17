@@ -55,10 +55,6 @@
       <Project>{43a8ca7f-2525-45f7-b3a0-4e28706e22b9}</Project>
       <Name>AbiokaDDD.ApplicationService</Name>
     </ProjectReference>
-    <ProjectReference Include="..\AbiokaDDD.Domain\AbiokaDDD.Domain.csproj">
-      <Project>{9fd50e4d-d959-4e28-8355-c678cf508361}</Project>
-      <Name>AbiokaDDD.Domain</Name>
-    </ProjectReference>
     <ProjectReference Include="..\AbiokaDDD.Infrastructure.Common\AbiokaDDD.Infrastructure.Common.csproj">
       <Project>{c4e96688-2189-4e50-a527-773df3f2e3a0}</Project>
       <Name>AbiokaDDD.Infrastructure.Common</Name>
@@ -66,10 +62,6 @@
     <ProjectReference Include="..\AbiokaDDD.Infrastructure.Framework\AbiokaDDD.Infrastructure.Framework.csproj">
       <Project>{edfaa5a0-a94a-4bad-acff-29523678f52a}</Project>
       <Name>AbiokaDDD.Infrastructure.Framework</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\AbiokaDDD.Repository.MongoDB\AbiokaDDD.Repository.MongoDB.csproj">
-      <Project>{9925ccca-1fdf-4825-ae8c-47dd6fbb0a5c}</Project>
-      <Name>AbiokaDDD.Repository.MongoDB</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

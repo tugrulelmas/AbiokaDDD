@@ -52,9 +52,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Bootstrapper.cs" />
     <Compile Include="ConfigConst.cs" />
     <Compile Include="DatabaseObjects\BoardMongoDB.cs" />
     <Compile Include="DatabaseObjects\DBObjectMapper.cs" />
+    <Compile Include="DatabaseObjects\IMongoEntity.cs" />
+    <Compile Include="IMongoDBContext.cs" />
     <Compile Include="Mapper.cs" />
     <Compile Include="MongoDBContext.cs" />
     <Compile Include="MongoDBReadOnlyRepository.cs" />

@@ -22,6 +22,7 @@ namespace AbiokaDDD.ApplicationService.Implementations
                 Board = board?.ToViewModel()
             };
             return result;
+
         }
 
         public AddBoardResponse AddBoard(AddBoardRequest request) {

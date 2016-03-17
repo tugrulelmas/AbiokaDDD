@@ -7,44 +7,33 @@ using System.Collections.Generic;
 
 namespace AbiokaDDD.Repository.MongoDB
 {
-    internal class MongoDBContext
+    internal class MongoDBContext : IMongoDBContext
     {
-        private IMongoDatabase database { get; set; }
-        private static MongoDBContext mongoDBContext;
+        private Lazy<IMongoDatabase> database { get; set; }
+        private readonly IDictionary<RuntimeTypeHandle, string> collectionNames;
 
-
-        private static readonly IDictionary<RuntimeTypeHandle, string> collectionNames;
-
-        static MongoDBContext() {
+        public MongoDBContext() {
             collectionNames = new Dictionary<RuntimeTypeHandle, string>();
             collectionNames.Add(typeof(BoardMongoDB).TypeHandle, "board");
+            database = new Lazy<IMongoDatabase>(() => SetDatabase());
         }
 
-        private MongoDBContext() { }
-
-        private static MongoDBContext Create() {
-            if (mongoDBContext == null)
-            {
-                var connectionStringRepository = DependencyContainer.Container.Resolve<IConnectionStringRepository>();
-                string connectionString = connectionStringRepository.ReadConnectionString(ConfigConst.ConnectionStringName);
-                var client = new MongoClient(connectionString);
-                var databaseName = connectionStringRepository.ReadAppSetting(ConfigConst.Database);
-                mongoDBContext = new MongoDBContext
-                {
-                    database = client.GetDatabase(databaseName)
-                };
-            }
-            return mongoDBContext;
-        }
-
-        public static IMongoCollection<T> GetCollection<T>() {
+        public IMongoCollection<T> GetCollection<T>() {
             var typeHandle = typeof(T).TypeHandle;
             if (!collectionNames.ContainsKey(typeHandle))
                 throw new NotSupportedException(string.Format("{0} is not registered type in collection names.", typeof(T).Name));
-
-            var context = Create();
+            
             var collectionName = collectionNames[typeHandle];
-            return context.database.GetCollection<T>(collectionName);
+            return database.Value.GetCollection<T>(collectionName);
+        }
+
+        private IMongoDatabase SetDatabase() {
+            var connectionStringRepository = DependencyContainer.Container.Resolve<IConnectionStringRepository>();
+            string connectionString = connectionStringRepository.ReadConnectionString(ConfigConst.ConnectionStringName);
+            var client = new MongoClient(connectionString);
+            var databaseName = connectionStringRepository.ReadAppSetting(ConfigConst.Database);
+
+            return client.GetDatabase(databaseName);
         }
     }
 }

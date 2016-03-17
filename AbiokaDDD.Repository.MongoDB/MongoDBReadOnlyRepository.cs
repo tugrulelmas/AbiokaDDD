@@ -1,16 +1,20 @@
-﻿using AbiokaDDD.Infrastructure.Common;
-using AbiokaDDD.Infrastructure.Common.ApplicationSettings;
-using AbiokaDDD.Infrastructure.Common.Domain;
+﻿using AbiokaDDD.Infrastructure.Common.Domain;
 using AbiokaDDD.Repository.MongoDB.DatabaseObjects;
 using MongoDB.Driver;
 using System.Collections.Generic;
 
 namespace AbiokaDDD.Repository.MongoDB
 {
-    public abstract class MongoDBReadOnlyRepository<T, TDBObject, TId> : IReadOnlyRepository<T>
+    internal abstract class MongoDBReadOnlyRepository<T, TDBObject, TId> : IReadOnlyRepository<T>
         where TDBObject : IIdMongoEntity<TId>
         where T : IEntity
     {
+        private readonly IMongoDBContext mongoDBContext;
+
+        public MongoDBReadOnlyRepository(IMongoDBContext mongoDBContext) {
+            this.mongoDBContext = mongoDBContext;
+        }
+
         protected virtual T FindById(TId id) {
             var result = Collection.Find(b => b.Id.Equals(id))
                 .FirstOrDefault();
@@ -34,6 +38,6 @@ namespace AbiokaDDD.Repository.MongoDB
             return FindById((TId)id);
         }
 
-        protected IMongoCollection<TDBObject> Collection { get { return MongoDBContext.GetCollection<TDBObject>(); } }
+        protected IMongoCollection<TDBObject> Collection { get { return mongoDBContext.GetCollection<TDBObject>(); } }
     }
 }

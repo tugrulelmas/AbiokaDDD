@@ -41,6 +41,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Abstractions\IBoardService.cs" />
+    <Compile Include="Bootstrapper.cs" />
     <Compile Include="Implementations\BoardService.cs" />
     <Compile Include="Map\BoardViewModelMapper.cs" />
     <Compile Include="Messaging\AddBoardRequest.cs" />
@@ -63,6 +64,10 @@
     <ProjectReference Include="..\AbiokaDDD.Infrastructure.Common\AbiokaDDD.Infrastructure.Common.csproj">
       <Project>{c4e96688-2189-4e50-a527-773df3f2e3a0}</Project>
       <Name>AbiokaDDD.Infrastructure.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\AbiokaDDD.Repository.MongoDB\AbiokaDDD.Repository.MongoDB.csproj">
+      <Project>{9925ccca-1fdf-4825-ae8c-47dd6fbb0a5c}</Project>
+      <Name>AbiokaDDD.Repository.MongoDB</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

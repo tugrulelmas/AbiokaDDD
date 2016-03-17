@@ -5,10 +5,14 @@ using MongoDB.Driver;
 
 namespace AbiokaDDD.Repository.MongoDB
 {
-    public abstract class MongoDBRepository<T, TDBObject, TId> : MongoDBReadOnlyRepository<T, TDBObject, TId>, IRepository<T>
+    internal abstract class MongoDBRepository<T, TDBObject, TId> : MongoDBReadOnlyRepository<T, TDBObject, TId>, IRepository<T>
         where TDBObject : IIdMongoEntity<TId>
         where T : IEntity
     {
+        public MongoDBRepository(IMongoDBContext mongoDBContext)
+            : base(mongoDBContext) {
+        }
+
         public virtual void Add(T entity) {
             var dbObject = DBObjectMapper.FromDomainObject(entity);
             Collection.InsertOne((TDBObject)dbObject);

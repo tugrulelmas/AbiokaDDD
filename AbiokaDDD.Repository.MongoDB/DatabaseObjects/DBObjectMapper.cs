@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 namespace DDDTest.Repository.MongoDB.DatabaseObjects
 {
-    public class DBObjectMapper
+    internal class DBObjectMapper
     {
         private static readonly IDictionary<RuntimeTypeHandle, Func<IEntity, IMongoEntity>> mapActions;
 
@@ -15,7 +15,7 @@ namespace DDDTest.Repository.MongoDB.DatabaseObjects
             mapActions.Add(typeof(Board).TypeHandle, (entity) => ToBoardMongoDB((Board)entity));
         }
 
-        public static IMongoEntity FromDomainObject(IEntity entity) {
+        internal static IMongoEntity FromDomainObject(IEntity entity) {
             var typeHandle = entity.GetType().TypeHandle;
             if (!mapActions.ContainsKey(typeHandle))
             {

@@ -34,13 +34,13 @@ namespace AbiokaDDD.ConsoleApp
             });
             if (boardResponse.Board != null)
             {
-                Console.WriteLine($"Id: {boardResponse.Board.Id}, Name: {boardResponse.Board.Name}");
+                Console.WriteLine($"Got Id: {boardResponse.Board.Id}, Name: {boardResponse.Board.Name}");
                 boardResponse.Board.Name = $"{boardResponse.Board.Name.Split('-').First().Trim()} - {DateTime.Now}";
                 var updateResponse = boardService.UpdateBoard(new UpdateBoardRequest
                 {
                     Board = boardResponse.Board
                 });
-                Console.WriteLine($"Id: {updateResponse.Board.Id}, Name: {updateResponse.Board.Name}");
+                Console.WriteLine($"Updated Id: {updateResponse.Board.Id}, Name: {updateResponse.Board.Name}");
             }
             else
             {
