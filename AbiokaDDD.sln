@@ -1,0 +1,52 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.24720.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AbiokaDDD.ApplicationService", "AbiokaDDD.ApplicationService\AbiokaDDD.ApplicationService.csproj", "{43A8CA7F-2525-45F7-B3A0-4E28706E22B9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AbiokaDDD.ConsoleApp", "AbiokaDDD.ConsoleApp\AbiokaDDD.ConsoleApp.csproj", "{DFA6D2E3-6AA4-4A49-8DFE-94E4ECFA8D8B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AbiokaDDD.Domain", "AbiokaDDD.Domain\AbiokaDDD.Domain.csproj", "{9FD50E4D-D959-4E28-8355-C678CF508361}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AbiokaDDD.Infrastructure.Common", "AbiokaDDD.Infrastructure.Common\AbiokaDDD.Infrastructure.Common.csproj", "{C4E96688-2189-4E50-A527-773DF3F2E3A0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AbiokaDDD.Infrastructure.Framework", "AbiokaDDD.Infrastructure.Framework\AbiokaDDD.Infrastructure.Framework.csproj", "{EDFAA5A0-A94A-4BAD-ACFF-29523678F52A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AbiokaDDD.Repository.MongoDB", "AbiokaDDD.Repository.MongoDB\AbiokaDDD.Repository.MongoDB.csproj", "{9925CCCA-1FDF-4825-AE8C-47DD6FBB0A5C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{43A8CA7F-2525-45F7-B3A0-4E28706E22B9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{43A8CA7F-2525-45F7-B3A0-4E28706E22B9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{43A8CA7F-2525-45F7-B3A0-4E28706E22B9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{43A8CA7F-2525-45F7-B3A0-4E28706E22B9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DFA6D2E3-6AA4-4A49-8DFE-94E4ECFA8D8B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DFA6D2E3-6AA4-4A49-8DFE-94E4ECFA8D8B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DFA6D2E3-6AA4-4A49-8DFE-94E4ECFA8D8B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DFA6D2E3-6AA4-4A49-8DFE-94E4ECFA8D8B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9FD50E4D-D959-4E28-8355-C678CF508361}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9FD50E4D-D959-4E28-8355-C678CF508361}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9FD50E4D-D959-4E28-8355-C678CF508361}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9FD50E4D-D959-4E28-8355-C678CF508361}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C4E96688-2189-4E50-A527-773DF3F2E3A0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C4E96688-2189-4E50-A527-773DF3F2E3A0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C4E96688-2189-4E50-A527-773DF3F2E3A0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C4E96688-2189-4E50-A527-773DF3F2E3A0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EDFAA5A0-A94A-4BAD-ACFF-29523678F52A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EDFAA5A0-A94A-4BAD-ACFF-29523678F52A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EDFAA5A0-A94A-4BAD-ACFF-29523678F52A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EDFAA5A0-A94A-4BAD-ACFF-29523678F52A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9925CCCA-1FDF-4825-AE8C-47DD6FBB0A5C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9925CCCA-1FDF-4825-AE8C-47DD6FBB0A5C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9925CCCA-1FDF-4825-AE8C-47DD6FBB0A5C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9925CCCA-1FDF-4825-AE8C-47DD6FBB0A5C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

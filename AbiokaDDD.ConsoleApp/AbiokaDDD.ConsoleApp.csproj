@@ -1,0 +1,83 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{DFA6D2E3-6AA4-4A49-8DFE-94E4ECFA8D8B}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>AbiokaDDD.ConsoleApp</RootNamespace>
+    <AssemblyName>AbiokaDDD.ConsoleApp</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Bootstrapper.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\AbiokaDDD.ApplicationService\AbiokaDDD.ApplicationService.csproj">
+      <Project>{43a8ca7f-2525-45f7-b3a0-4e28706e22b9}</Project>
+      <Name>AbiokaDDD.ApplicationService</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\AbiokaDDD.Domain\AbiokaDDD.Domain.csproj">
+      <Project>{9fd50e4d-d959-4e28-8355-c678cf508361}</Project>
+      <Name>AbiokaDDD.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\AbiokaDDD.Infrastructure.Common\AbiokaDDD.Infrastructure.Common.csproj">
+      <Project>{c4e96688-2189-4e50-a527-773df3f2e3a0}</Project>
+      <Name>AbiokaDDD.Infrastructure.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\AbiokaDDD.Infrastructure.Framework\AbiokaDDD.Infrastructure.Framework.csproj">
+      <Project>{edfaa5a0-a94a-4bad-acff-29523678f52a}</Project>
+      <Name>AbiokaDDD.Infrastructure.Framework</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\AbiokaDDD.Repository.MongoDB\AbiokaDDD.Repository.MongoDB.csproj">
+      <Project>{9925ccca-1fdf-4825-ae8c-47dd6fbb0a5c}</Project>
+      <Name>AbiokaDDD.Repository.MongoDB</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
