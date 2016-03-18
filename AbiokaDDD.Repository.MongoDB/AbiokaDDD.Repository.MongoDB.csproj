@@ -55,8 +55,10 @@
     <Compile Include="Bootstrapper.cs" />
     <Compile Include="ConfigConst.cs" />
     <Compile Include="DatabaseObjects\BoardMongoDB.cs" />
+    <Compile Include="DatabaseObjects\BoardMongoDBExtensions.cs" />
     <Compile Include="DatabaseObjects\DBObjectMapper.cs" />
     <Compile Include="DatabaseObjects\IMongoEntity.cs" />
+    <Compile Include="DatabaseObjects\ListMongoDB.cs" />
     <Compile Include="IMongoDBContext.cs" />
     <Compile Include="MongoDBContext.cs" />
     <Compile Include="MongoDBReadOnlyRepository.cs" />

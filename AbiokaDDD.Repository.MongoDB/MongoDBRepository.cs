@@ -2,6 +2,7 @@
 using AbiokaDDD.Repository.MongoDB.DatabaseObjects;
 using DDDTest.Repository.MongoDB.DatabaseObjects;
 using MongoDB.Driver;
+using System;
 
 namespace AbiokaDDD.Repository.MongoDB
 {
@@ -16,6 +17,11 @@ namespace AbiokaDDD.Repository.MongoDB
         public virtual void Add(T entity) {
             var dbObject = DBObjectMapper.FromDomainObject(entity);
             Collection.InsertOne((TDBObject)dbObject);
+
+            if (entity is IIdEntity<TId>)
+            {
+                ((IIdEntity<TId>)entity).Id = ((TDBObject)dbObject).Id;
+            }
         }
 
         public virtual void Delete(T entity) {

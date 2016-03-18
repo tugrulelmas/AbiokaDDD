@@ -3,6 +3,7 @@ using AbiokaDDD.ApplicationService.DTOs;
 using AbiokaDDD.ApplicationService.Messaging;
 using AbiokaDDD.Infrastructure.Common.IoC;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace AbiokaDDD.ConsoleApp
@@ -18,8 +19,11 @@ namespace AbiokaDDD.ConsoleApp
             {
                 Board = new BoardDTO
                 {
-                    Id = Guid.NewGuid(),
-                    Name = "Yaprak"
+                    Name = "Yaprak",
+                    Lists = new List<ListDTO>
+                    {
+                        new ListDTO { Name = "List 1" }
+                    }
                 }
             };
             var addBoardResponse = boardService.AddBoard(addBoardRequest);
@@ -30,7 +34,8 @@ namespace AbiokaDDD.ConsoleApp
 
             var boardResponse = boardService.GetBoardById(new GetBoardByIdRequest
             {
-                BoardId = Guid.Parse("ca735fdf-5fcb-4189-8cc0-e953ae0af502")
+                BoardId = Guid.Parse("8c692d6c-d118-4a54-ab23-70d14ec36bd8"),
+                IncludeList = true
             });
             if (boardResponse.Board != null)
             {

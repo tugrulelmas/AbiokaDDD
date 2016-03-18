@@ -1,6 +1,7 @@
 ﻿using AbiokaDDD.Infrastructure.Common.Domain;
 using AbiokaDDD.Repository.MongoDB.DatabaseObjects;
 using MongoDB.Driver;
+using System;
 using System.Collections.Generic;
 
 namespace AbiokaDDD.Repository.MongoDB

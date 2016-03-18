@@ -28,7 +28,8 @@ namespace DDDTest.Repository.MongoDB.DatabaseObjects
             return new BoardMongoDB
             {
                 Id = board.Id,
-                Name = board.Name
+                Name = board.Name,
+                Lists = board.Lists?.ToListMongoDBs()
             };
         }
     }

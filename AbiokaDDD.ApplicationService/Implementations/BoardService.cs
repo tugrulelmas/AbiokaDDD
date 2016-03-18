@@ -16,7 +16,7 @@ namespace AbiokaDDD.ApplicationService.Implementations
         }
 
         public GetBoardByIdResponse GetBoardById(GetBoardByIdRequest request) {
-            Board board = boardRepository.FindById(request.BoardId);
+            Board board = boardRepository.GetBoard(request.BoardId, request.IncludeList);
             var result = new GetBoardByIdResponse
             {
                 Board = board?.ToDTO()
