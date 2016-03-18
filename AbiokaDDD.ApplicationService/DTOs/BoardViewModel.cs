@@ -1,8 +1,8 @@
 ﻿using System;
 
-namespace AbiokaDDD.ApplicationService.ViewModel
+namespace AbiokaDDD.ApplicationService.DTOs
 {
-    public class BoardViewModel
+    public class BoardDTO
     {
         public Guid Id { get; set; }
 

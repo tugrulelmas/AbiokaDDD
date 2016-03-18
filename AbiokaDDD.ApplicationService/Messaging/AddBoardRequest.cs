@@ -1,10 +1,9 @@
-﻿using AbiokaDDD.ApplicationService.ViewModel;
-using System;
+﻿using AbiokaDDD.ApplicationService.DTOs;
 
 namespace AbiokaDDD.ApplicationService.Messaging
 {
     public class AddBoardRequest : ServiceRequestBase
     {
-        public BoardViewModel Board { get; set; }
+        public BoardDTO Board { get; set; }
     }
 }

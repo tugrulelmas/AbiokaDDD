@@ -1,8 +1,8 @@
 ﻿using AbiokaDDD.ApplicationService.Abstractions;
+using AbiokaDDD.ApplicationService.Map;
 using AbiokaDDD.ApplicationService.Messaging;
 using AbiokaDDD.Domain;
 using AbiokaDDD.Domain.Repositories;
-using AbiokaDDD.ApplicationService.Map;
 using System;
 
 namespace AbiokaDDD.ApplicationService.Implementations
@@ -19,7 +19,7 @@ namespace AbiokaDDD.ApplicationService.Implementations
             Board board = boardRepository.FindById(request.BoardId);
             var result = new GetBoardByIdResponse
             {
-                Board = board?.ToViewModel()
+                Board = board?.ToDTO()
             };
             return result;
 
@@ -31,7 +31,7 @@ namespace AbiokaDDD.ApplicationService.Implementations
 
             return new AddBoardResponse
             {
-                Board = board.ToViewModel()
+                Board = board.ToDTO()
             };
         }
 
@@ -41,7 +41,7 @@ namespace AbiokaDDD.ApplicationService.Implementations
 
             return new UpdateBoardResponse
             {
-                Board = board.ToViewModel()
+                Board = board.ToDTO()
             };
         }
 

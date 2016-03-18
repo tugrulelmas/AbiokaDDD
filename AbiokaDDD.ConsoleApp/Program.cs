@@ -1,6 +1,6 @@
 ﻿using AbiokaDDD.ApplicationService.Abstractions;
+using AbiokaDDD.ApplicationService.DTOs;
 using AbiokaDDD.ApplicationService.Messaging;
-using AbiokaDDD.ApplicationService.ViewModel;
 using AbiokaDDD.Infrastructure.Common.IoC;
 using System;
 using System.Linq;
@@ -16,7 +16,7 @@ namespace AbiokaDDD.ConsoleApp
 
             var addBoardRequest = new AddBoardRequest
             {
-                Board = new BoardViewModel
+                Board = new BoardDTO
                 {
                     Id = Guid.NewGuid(),
                     Name = "Yaprak"
