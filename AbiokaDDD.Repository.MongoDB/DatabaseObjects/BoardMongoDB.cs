@@ -4,7 +4,7 @@ using System;
 
 namespace AbiokaDDD.Repository.MongoDB.DatabaseObjects
 {
-    internal class BoardMongoDB : IdMongoEntity<Guid>
+    internal class BoardMongoDB : GuidMongoEntity
     {
         public string Name { get; set; }
 
