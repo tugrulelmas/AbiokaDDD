@@ -35,7 +35,7 @@ namespace AbiokaDDD.ConsoleApp
             var boardResponse = boardService.GetBoardById(new GetBoardByIdRequest
             {
                 BoardId = Guid.Parse("8c692d6c-d118-4a54-ab23-70d14ec36bd8"),
-                IncludeList = true
+                IncludeList = false
             });
             if (boardResponse.Board != null)
             {

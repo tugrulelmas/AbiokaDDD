@@ -11,6 +11,8 @@ namespace AbiokaDDD.Repository.MongoDB.DatabaseObjects
         public TId Id { get; set; }
 
         public abstract IEntity ToDomainObject();
+
+        public abstract void SetDefault();
     }
 
     internal interface IIdMongoEntity<TId> : IMongoEntity
@@ -22,17 +24,26 @@ namespace AbiokaDDD.Repository.MongoDB.DatabaseObjects
 
     internal interface IMongoEntity
     {
-
+        void SetDefault();
     }
 
     internal abstract class MongoValueObject : IMongoValueObject
     {
         [BsonId(IdGenerator = typeof(GuidGenerator))]
         public Guid Id { get; set; }
+
+        public void SetDefault() {
+            if (Id == Guid.Empty)
+            {
+                Id = Guid.NewGuid();
+            }
+        }
     }
 
     internal interface IMongoValueObject
     {
         Guid Id { get; set; }
+
+        void SetDefault();
     }
 }

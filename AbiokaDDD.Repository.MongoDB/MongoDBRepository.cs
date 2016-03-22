@@ -1,5 +1,6 @@
 ﻿using AbiokaDDD.Infrastructure.Common.Domain;
 using AbiokaDDD.Repository.MongoDB.DatabaseObjects;
+using AbiokaDDD.Repository.MongoDB.Helper;
 using DDDTest.Repository.MongoDB.DatabaseObjects;
 using MongoDB.Driver;
 using System;
@@ -10,12 +11,16 @@ namespace AbiokaDDD.Repository.MongoDB
         where TDBObject : IIdMongoEntity<TId>
         where T : IEntity
     {
-        public MongoDBRepository(IMongoDBContext mongoDBContext)
+        private readonly IPropertyHelper propertyHelper;
+
+        public MongoDBRepository(IMongoDBContext mongoDBContext, IPropertyHelper propertyHelper)
             : base(mongoDBContext) {
+            this.propertyHelper = propertyHelper;
         }
 
         public virtual void Add(T entity) {
             var dbObject = DBObjectMapper.FromDomainObject(entity);
+            dbObject.SetDefault();
             Collection.InsertOne((TDBObject)dbObject);
 
             if (entity is IIdEntity<TId>)
@@ -32,7 +37,14 @@ namespace AbiokaDDD.Repository.MongoDB
 
         public virtual void Update(T entity) {
             var dbObject = (IIdMongoEntity<TId>)DBObjectMapper.FromDomainObject(entity);
-            Collection.FindOneAndReplace(o => o.Id.Equals(dbObject.Id), (TDBObject)dbObject);
+            var updatableProperties = propertyHelper.GetUpdatableProperties<TDBObject>();
+            UpdateDefinition<TDBObject> updateBuilder = null;
+            foreach (var propertyItem in updatableProperties)
+            {
+                updateBuilder = Builders<TDBObject>.Update.Set(propertyItem.Name, propertyItem.GetValue(dbObject));
+            }
+
+            Collection.UpdateOne(o => o.Id.Equals(dbObject.Id), updateBuilder);
         }
     }
 }

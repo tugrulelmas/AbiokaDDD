@@ -3,6 +3,7 @@ using AbiokaDDD.Infrastructure.Common.Domain;
 using AbiokaDDD.Repository.MongoDB.DatabaseObjects;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace DDDTest.Repository.MongoDB.DatabaseObjects
 {
@@ -29,7 +30,7 @@ namespace DDDTest.Repository.MongoDB.DatabaseObjects
             {
                 Id = board.Id,
                 Name = board.Name,
-                Lists = board.Lists?.ToListMongoDBs()
+                Lists = board.Lists?.ToListMongoDBs().ToList()
             };
         }
     }

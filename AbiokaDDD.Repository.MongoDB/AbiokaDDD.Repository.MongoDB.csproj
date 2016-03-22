@@ -59,6 +59,8 @@
     <Compile Include="DatabaseObjects\DBObjectMapper.cs" />
     <Compile Include="DatabaseObjects\IMongoEntity.cs" />
     <Compile Include="DatabaseObjects\ListMongoDB.cs" />
+    <Compile Include="Helper\IPropertyHelper.cs" />
+    <Compile Include="Helper\PropertyHelper.cs" />
     <Compile Include="IMongoDBContext.cs" />
     <Compile Include="MongoDBContext.cs" />
     <Compile Include="MongoDBReadOnlyRepository.cs" />

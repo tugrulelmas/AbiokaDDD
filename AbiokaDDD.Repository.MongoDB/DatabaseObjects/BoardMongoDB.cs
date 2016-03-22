@@ -9,7 +9,7 @@ namespace AbiokaDDD.Repository.MongoDB.DatabaseObjects
     {
         public string Name { get; set; }
 
-        public IEnumerable<ListMongoDB> Lists { get; set; }
+        public List<ListMongoDB> Lists { get; set; }
 
         public override IEntity ToDomainObject() {
             var result = new Board
@@ -19,6 +19,13 @@ namespace AbiokaDDD.Repository.MongoDB.DatabaseObjects
                 Lists = Lists.ToLists()
             };
             return result;
+        }
+
+        public override void SetDefault() {
+            foreach (var listItem in Lists)
+            {
+                listItem.SetDefault();
+            }
         }
     }
 }

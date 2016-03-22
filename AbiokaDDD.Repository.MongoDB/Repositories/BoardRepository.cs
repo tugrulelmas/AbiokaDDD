@@ -1,6 +1,7 @@
 ﻿using AbiokaDDD.Domain;
 using AbiokaDDD.Domain.Repositories;
 using AbiokaDDD.Repository.MongoDB.DatabaseObjects;
+using AbiokaDDD.Repository.MongoDB.Helper;
 using MongoDB.Driver;
 using System;
 using System.Collections.Generic;
@@ -9,19 +10,16 @@ namespace AbiokaDDD.Repository.MongoDB.Repositories
 {
     internal class BoardRepository : MongoDBRepository<Board, BoardMongoDB, Guid>, IBoardRepository
     {
-        public BoardRepository(IMongoDBContext mongoDBContext)
-            : base(mongoDBContext) {
+        public BoardRepository(IMongoDBContext mongoDBContext, IPropertyHelper propertyHelper)
+            : base(mongoDBContext, propertyHelper) {
         }
 
         public void AddList(Guid boardId, List list) {
-            if(list.Id == Guid.Empty)
-            {
-                list.Id = Guid.NewGuid();
-            }
-
             var listMongoDB = list.ToListMongoDB();
+            listMongoDB.SetDefault();
             var update = Builders<BoardMongoDB>.Update.Push(b => b.Lists, listMongoDB);
             Collection.UpdateOne(b => b.Id == boardId, update);
+            list.Id = listMongoDB.Id;
         }
 
         public Board GetBoard(Guid id, bool includeList) {
