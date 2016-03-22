@@ -8,6 +8,8 @@ namespace AbiokaDDD.Domain.Repositories
     {
         IEnumerable<Board> GetBoards(bool includeList);
 
-        Board GetBoard(Guid id, bool includeList);
+        Board GetBoard(Guid id, bool includeLists);
+
+        void AddList(Guid boardId, List list);
     }
 }

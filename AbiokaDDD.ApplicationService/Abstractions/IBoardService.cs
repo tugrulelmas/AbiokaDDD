@@ -9,6 +9,8 @@ namespace AbiokaDDD.ApplicationService.Abstractions
 
         AddBoardResponse AddBoard(AddBoardRequest request);
 
+        AddListResponse AddList(AddListRequest request);
+
         DeleteBoardResponse DeleteBoard(Guid id);
 
         UpdateBoardResponse UpdateBoard(UpdateBoardRequest request);

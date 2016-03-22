@@ -45,6 +45,8 @@
     <Compile Include="DTOs\ListDTO.cs" />
     <Compile Include="Implementations\BoardService.cs" />
     <Compile Include="Map\BoardDTOMapper.cs" />
+    <Compile Include="Messaging\AddListResponse.cs" />
+    <Compile Include="Messaging\AddListRequest.cs" />
     <Compile Include="Messaging\AddBoardRequest.cs" />
     <Compile Include="Messaging\AddBoardResponse.cs" />
     <Compile Include="Messaging\DeleteBoardResponse.cs" />

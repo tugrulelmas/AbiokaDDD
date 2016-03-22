@@ -33,7 +33,19 @@ namespace AbiokaDDD.ApplicationService.Map
             return result;
         }
 
-        private static List ToDomainList(this ListDTO list) {
+        public static ListDTO ToDTO(this List list) {
+            if (list == null)
+                return null;
+
+            var result = new ListDTO
+            {
+                Id = list.Id,
+                Name = list.Name
+            };
+            return result;
+        }
+
+        public static List ToDomainObject(this ListDTO list) {
             if (list == null)
                 return null;
 
@@ -51,7 +63,7 @@ namespace AbiokaDDD.ApplicationService.Map
 
             foreach (var item in lists)
             {
-                yield return item.ToDomainList();
+                yield return item.ToDomainObject();
             }
         }
 

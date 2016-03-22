@@ -55,5 +55,15 @@ namespace AbiokaDDD.ApplicationService.Implementations
 
             return new DeleteBoardResponse();
         }
+
+        public AddListResponse AddList(AddListRequest request) {
+            var list = request.List.ToDomainObject();
+            boardRepository.AddList(request.BoardId, list);
+
+            return new AddListResponse
+            {
+                List = list.ToDTO()
+            };
+        }
     }
 }

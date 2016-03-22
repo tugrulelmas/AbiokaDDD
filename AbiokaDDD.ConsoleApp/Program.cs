@@ -46,6 +46,10 @@ namespace AbiokaDDD.ConsoleApp
                     Board = boardResponse.Board
                 });
                 Console.WriteLine($"Updated Id: {updateResponse.Board.Id}, Name: {updateResponse.Board.Name}");
+
+                var list = new ListDTO { Name = $"List - {DateTime.Now}" };
+                var addListResponse = boardService.AddList(new AddListRequest { BoardId = boardResponse.Board.Id, List = list });
+                Console.WriteLine($"Added List Board Id: {updateResponse.Board.Id}, List Id: {addListResponse.List.Id}");
             }
             else
             {

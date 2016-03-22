@@ -13,6 +13,17 @@ namespace AbiokaDDD.Repository.MongoDB.Repositories
             : base(mongoDBContext) {
         }
 
+        public void AddList(Guid boardId, List list) {
+            if(list.Id == Guid.Empty)
+            {
+                list.Id = Guid.NewGuid();
+            }
+
+            var listMongoDB = list.ToListMongoDB();
+            var update = Builders<BoardMongoDB>.Update.Push(b => b.Lists, listMongoDB);
+            Collection.UpdateOne(b => b.Id == boardId, update);
+        }
+
         public Board GetBoard(Guid id, bool includeList) {
             var query = Collection.Find(b => b.Id == id);
             if (!includeList)
