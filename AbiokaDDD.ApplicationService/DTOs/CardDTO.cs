@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace AbiokaDDD.ApplicationService.DTOs
 {
@@ -7,5 +8,7 @@ namespace AbiokaDDD.ApplicationService.DTOs
         public Guid Id { get; set; }
 
         public string Title { get; set; }
+
+        public IEnumerable<CommentDTO> Comments { get; set; }
     }
 }

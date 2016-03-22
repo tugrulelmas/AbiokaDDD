@@ -98,7 +98,8 @@ namespace AbiokaDDD.ApplicationService.Map
             var result = new Card
             {
                 Id = card.Id,
-                Title = card.Title
+                Title = card.Title,
+                Comments = card.Comments.ToDomainObject()
             };
             return result;
         }
@@ -121,6 +122,7 @@ namespace AbiokaDDD.ApplicationService.Map
             {
                 Id = card.Id,
                 Title = card.Title,
+                Comments = card.Comments.ToDTOs()
             };
             return result;
         }
@@ -130,6 +132,50 @@ namespace AbiokaDDD.ApplicationService.Map
                 yield break;
 
             foreach (var item in cards)
+            {
+                yield return item.ToDTO();
+            }
+        }
+
+        public static Comment ToDomainObject(this CommentDTO comment) {
+            if (comment == null)
+                return null;
+
+            var result = new Comment
+            {
+                Id = comment.Id,
+                Text = comment.Text
+            };
+            return result;
+        }
+
+        private static IEnumerable<Comment> ToDomainObject(this IEnumerable<CommentDTO> comments) {
+            if (comments == null)
+                yield break;
+
+            foreach (var item in comments)
+            {
+                yield return item.ToDomainObject();
+            }
+        }
+
+        public static CommentDTO ToDTO(this Comment comment) {
+            if (comment == null)
+                return null;
+
+            var result = new CommentDTO
+            {
+                Id = comment.Id,
+                Text = comment.Text,
+            };
+            return result;
+        }
+
+        private static IEnumerable<CommentDTO> ToDTOs(this IEnumerable<Comment> comments) {
+            if (comments == null)
+                yield break;
+
+            foreach (var item in comments)
             {
                 yield return item.ToDTO();
             }

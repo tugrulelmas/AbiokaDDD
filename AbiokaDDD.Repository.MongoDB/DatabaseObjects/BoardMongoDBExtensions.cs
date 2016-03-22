@@ -1,4 +1,5 @@
 ﻿using AbiokaDDD.Domain;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -10,12 +11,28 @@ namespace AbiokaDDD.Repository.MongoDB.DatabaseObjects
             if (list == null)
                 return null;
 
-            return new ListMongoDB
+            var comments = new List<CommentMongoDB>();
+            var cards = new List<Card>();
+            foreach (var card in list.Cards)
+            {
+                if(card.Id == Guid.Empty)
+                {
+                    card.Id = Guid.NewGuid();
+                }
+                cards.Add(card);
+                comments.AddRange(card.Comments.ToMongoDBs(card.Id));
+            }
+            list.Cards = cards;
+
+            var listMongoDB =  new ListMongoDB
             {
                 Id = list.Id,
                 Name = list.Name,
-                Cards = list.Cards?.ToMongoDBs().ToList()
+                Cards = list.Cards?.ToMongoDBs().ToList(),
+                Comments = comments
             };
+            listMongoDB.SetDefault();
+            return listMongoDB;
         }
 
         public static IEnumerable<ListMongoDB> ToListMongoDBs(this IEnumerable<List> lists) {
@@ -36,7 +53,7 @@ namespace AbiokaDDD.Repository.MongoDB.DatabaseObjects
             {
                 Id = list.Id,
                 Name = list.Name,
-                Cards = list.Cards.ToCards()
+                Cards = list.Cards.ToCards(list.Comments)
             };
         }
 
@@ -50,24 +67,25 @@ namespace AbiokaDDD.Repository.MongoDB.DatabaseObjects
             }
         }
 
-        private static Card ToCard(this CardMongoDB card) {
+        private static Card ToCard(this CardMongoDB card, IEnumerable<CommentMongoDB> comments) {
             if (card == null)
                 return null;
 
             return new Card
             {
                 Id = card.Id,
-                Title = card.Title
+                Title = card.Title,
+                Comments = comments.ToComments()
             };
         }
 
-        private static IEnumerable<Card> ToCards(this IEnumerable<CardMongoDB> cards) {
+        private static IEnumerable<Card> ToCards(this IEnumerable<CardMongoDB> cards, IEnumerable<CommentMongoDB> comments) {
             if (cards == null)
                 yield break;
 
             foreach (var item in cards)
             {
-                yield return item.ToCard();
+                yield return item.ToCard(comments);
             }
         }
 
@@ -75,11 +93,13 @@ namespace AbiokaDDD.Repository.MongoDB.DatabaseObjects
             if (card == null)
                 return null;
 
-            return new CardMongoDB
+            var result = new CardMongoDB
             {
                 Id = card.Id,
                 Title = card.Title
             };
+            result.SetDefault();
+            return result;
         }
 
         private static IEnumerable<CardMongoDB> ToMongoDBs(this IEnumerable<Card> cards) {
@@ -89,6 +109,51 @@ namespace AbiokaDDD.Repository.MongoDB.DatabaseObjects
             foreach (var item in cards)
             {
                 yield return item.ToCardMongoDB();
+            }
+        }
+
+        public static CommentMongoDB ToCommentMongoDB(this Comment comment, Guid cardId) {
+            if (comment == null)
+                return null;
+
+            var result = new CommentMongoDB
+            {
+                Id = comment.Id,
+                CardId = cardId,
+                Text = comment.Text
+            };
+            result.SetDefault();
+            return result;
+        }
+
+        private static IEnumerable<CommentMongoDB> ToMongoDBs(this IEnumerable<Comment> comments, Guid cardId) {
+            if (comments == null)
+                yield break;
+
+            foreach (var item in comments)
+            {
+                yield return item.ToCommentMongoDB(cardId);
+            }
+        }
+
+        private static Comment ToComment(this CommentMongoDB comment) {
+            if (comment == null)
+                return null;
+
+            return new Comment
+            {
+                Id = comment.Id,
+                Text = comment.Text
+            };
+        }
+
+        private static IEnumerable<Comment> ToComments(this IEnumerable<CommentMongoDB> comments) {
+            if (comments == null)
+                yield break;
+
+            foreach (var item in comments)
+            {
+                yield return item.ToComment();
             }
         }
     }

@@ -42,10 +42,13 @@
   <ItemGroup>
     <Compile Include="Abstractions\IBoardService.cs" />
     <Compile Include="Bootstrapper.cs" />
+    <Compile Include="DTOs\CommentDTO.cs" />
     <Compile Include="DTOs\CardDTO.cs" />
     <Compile Include="DTOs\ListDTO.cs" />
     <Compile Include="Implementations\BoardService.cs" />
     <Compile Include="Map\BoardDTOMapper.cs" />
+    <Compile Include="Messaging\AddCommentResponse.cs" />
+    <Compile Include="Messaging\AddCommentRequest.cs" />
     <Compile Include="Messaging\AddCardRequest.cs" />
     <Compile Include="Messaging\AddCardResponse.cs" />
     <Compile Include="Messaging\AddListResponse.cs" />

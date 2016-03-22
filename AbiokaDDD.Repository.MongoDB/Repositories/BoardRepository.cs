@@ -17,15 +17,20 @@ namespace AbiokaDDD.Repository.MongoDB.Repositories
 
         public void AddCard(Guid boardId, Guid listId, Card card) {
             var cardMongoDB = card.ToCardMongoDB();
-            cardMongoDB.SetDefault();
             var update = Builders<BoardMongoDB>.Update.Push(b => b.Lists.ElementAt(-1).Cards, cardMongoDB);
             Collection.UpdateOne(b => b.Id == boardId && b.Lists.Any(l => l.Id == listId), update);
             card.Id = cardMongoDB.Id;
         }
 
+        public void AddComment(Guid boardId, Guid listId, Guid cardId, Comment comment) {
+            var commentMongoDB = comment.ToCommentMongoDB(cardId);
+            var update = Builders<BoardMongoDB>.Update.Push(b => b.Lists.ElementAt(-1).Comments, commentMongoDB);
+            Collection.UpdateOne(b => b.Id == boardId && b.Lists.Any(l => l.Id == listId), update);
+            comment.Id = commentMongoDB.Id;
+        }
+
         public void AddList(Guid boardId, List list) {
             var listMongoDB = list.ToListMongoDB();
-            listMongoDB.SetDefault();
             var update = Builders<BoardMongoDB>.Update.Push(b => b.Lists, listMongoDB);
             Collection.UpdateOne(b => b.Id == boardId, update);
             list.Id = listMongoDB.Id;

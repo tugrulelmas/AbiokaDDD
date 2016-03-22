@@ -1,4 +1,6 @@
-﻿namespace AbiokaDDD.Repository.MongoDB.DatabaseObjects
+﻿using System.Collections.Generic;
+
+namespace AbiokaDDD.Repository.MongoDB.DatabaseObjects
 {
     internal class CardMongoDB : MongoValueObject
     {

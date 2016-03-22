@@ -13,5 +13,7 @@ namespace AbiokaDDD.Domain.Repositories
         void AddList(Guid boardId, List list);
 
         void AddCard(Guid boardId, Guid listId, Card card);
+
+        void AddComment(Guid boardId, Guid listId, Guid cardId, Comment comment);
     }
 }
