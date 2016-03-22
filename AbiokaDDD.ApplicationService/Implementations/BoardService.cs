@@ -65,5 +65,15 @@ namespace AbiokaDDD.ApplicationService.Implementations
                 List = list.ToDTO()
             };
         }
+
+        public AddCardResponse AddCard(AddCardRequest request) {
+            var card = request.Card.ToDomainObject();
+            boardRepository.AddCard(request.BoardId, request.ListId, card);
+
+            return new AddCardResponse
+            {
+                Card = card.ToDTO()
+            };
+        }
     }
 }

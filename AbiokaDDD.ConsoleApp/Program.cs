@@ -22,7 +22,10 @@ namespace AbiokaDDD.ConsoleApp
                     Name = "Yaprak",
                     Lists = new List<ListDTO>
                     {
-                        new ListDTO { Name = "List 1" }
+                        new ListDTO {
+                            Name = "List 1" ,
+                            Cards = new List<CardDTO> { new CardDTO { Title = "Doing" } }
+                        }
                     }
                 }
             };
@@ -50,6 +53,10 @@ namespace AbiokaDDD.ConsoleApp
                 var list = new ListDTO { Name = $"List - {DateTime.Now}" };
                 var addListResponse = boardService.AddList(new AddListRequest { BoardId = boardResponse.Board.Id, List = list });
                 Console.WriteLine($"Added List Board Id: {updateResponse.Board.Id}, List Id: {addListResponse.List.Id}");
+
+                var card = new CardDTO { Title = $"Doing - {DateTime.Now}" };
+                var addCardResponse = boardService.AddCard(new AddCardRequest { BoardId = updateResponse.Board.Id, ListId = addListResponse.List.Id, Card = card });
+                Console.WriteLine($"Added Card Board Id: {updateResponse.Board.Id}, List Id: {addListResponse.List.Id}, Card Id: {addCardResponse.Card.Id}");
             }
             else
             {

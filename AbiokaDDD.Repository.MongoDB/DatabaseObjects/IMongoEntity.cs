@@ -32,7 +32,7 @@ namespace AbiokaDDD.Repository.MongoDB.DatabaseObjects
         [BsonId(IdGenerator = typeof(GuidGenerator))]
         public Guid Id { get; set; }
 
-        public void SetDefault() {
+        public virtual void SetDefault() {
             if (Id == Guid.Empty)
             {
                 Id = Guid.NewGuid();

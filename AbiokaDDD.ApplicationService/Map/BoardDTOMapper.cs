@@ -52,14 +52,15 @@ namespace AbiokaDDD.ApplicationService.Map
             var result = new List
             {
                 Id = list.Id,
-                Name = list.Name
+                Name = list.Name,
+                Cards = list.Cards.ToDomainObject()
             };
             return result;
         }
 
         private static IEnumerable<List> ToDomainObject(this IEnumerable<ListDTO> lists) {
             if (lists == null)
-                yield break;// return null;
+                yield break;
 
             foreach (var item in lists)
             {
@@ -74,18 +75,63 @@ namespace AbiokaDDD.ApplicationService.Map
             var result = new ListDTO
             {
                 Id = list.Id,
-                Name = list.Name
+                Name = list.Name,
+                Cards = list.Cards.ToDTOs()
             };
             return result;
         }
 
         private static IEnumerable<ListDTO> ToDTOs(this IEnumerable<List> lists) {
             if (lists == null)
-                yield break;// return null;
+                yield break;
 
             foreach (var item in lists)
             {
                 yield return item.ToDTOList();
+            }
+        }
+
+        public static Card ToDomainObject(this CardDTO card) {
+            if (card == null)
+                return null;
+
+            var result = new Card
+            {
+                Id = card.Id,
+                Title = card.Title
+            };
+            return result;
+        }
+
+        private static IEnumerable<Card> ToDomainObject(this IEnumerable<CardDTO> cards) {
+            if (cards == null)
+                yield break;
+
+            foreach (var item in cards)
+            {
+                yield return item.ToDomainObject();
+            }
+        }
+
+        public static CardDTO ToDTO(this Card card) {
+            if (card == null)
+                return null;
+
+            var result = new CardDTO
+            {
+                Id = card.Id,
+                Title = card.Title,
+            };
+            return result;
+        }
+
+        private static IEnumerable<CardDTO> ToDTOs(this IEnumerable<Card> cards) {
+            if (cards == null)
+                yield break;
+
+            foreach (var item in cards)
+            {
+                yield return item.ToDTO();
             }
         }
     }

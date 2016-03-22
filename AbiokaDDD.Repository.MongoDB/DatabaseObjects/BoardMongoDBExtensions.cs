@@ -1,5 +1,6 @@
 ﻿using AbiokaDDD.Domain;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace AbiokaDDD.Repository.MongoDB.DatabaseObjects
 {
@@ -12,7 +13,8 @@ namespace AbiokaDDD.Repository.MongoDB.DatabaseObjects
             return new ListMongoDB
             {
                 Id = list.Id,
-                Name = list.Name
+                Name = list.Name,
+                Cards = list.Cards?.ToMongoDBs().ToList()
             };
         }
 
@@ -33,7 +35,8 @@ namespace AbiokaDDD.Repository.MongoDB.DatabaseObjects
             return new List
             {
                 Id = list.Id,
-                Name = list.Name
+                Name = list.Name,
+                Cards = list.Cards.ToCards()
             };
         }
 
@@ -44,6 +47,48 @@ namespace AbiokaDDD.Repository.MongoDB.DatabaseObjects
             foreach (var item in lists)
             {
                 yield return item.ToList();
+            }
+        }
+
+        private static Card ToCard(this CardMongoDB card) {
+            if (card == null)
+                return null;
+
+            return new Card
+            {
+                Id = card.Id,
+                Title = card.Title
+            };
+        }
+
+        private static IEnumerable<Card> ToCards(this IEnumerable<CardMongoDB> cards) {
+            if (cards == null)
+                yield break;
+
+            foreach (var item in cards)
+            {
+                yield return item.ToCard();
+            }
+        }
+
+        public static CardMongoDB ToCardMongoDB(this Card card) {
+            if (card == null)
+                return null;
+
+            return new CardMongoDB
+            {
+                Id = card.Id,
+                Title = card.Title
+            };
+        }
+
+        private static IEnumerable<CardMongoDB> ToMongoDBs(this IEnumerable<Card> cards) {
+            if (cards == null)
+                yield break;
+
+            foreach (var item in cards)
+            {
+                yield return item.ToCardMongoDB();
             }
         }
     }

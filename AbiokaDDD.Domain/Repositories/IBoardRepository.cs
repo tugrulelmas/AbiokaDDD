@@ -11,5 +11,7 @@ namespace AbiokaDDD.Domain.Repositories
         Board GetBoard(Guid id, bool includeLists);
 
         void AddList(Guid boardId, List list);
+
+        void AddCard(Guid boardId, Guid listId, Card card);
     }
 }

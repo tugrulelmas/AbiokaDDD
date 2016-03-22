@@ -5,6 +5,7 @@ using AbiokaDDD.Repository.MongoDB.Helper;
 using MongoDB.Driver;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace AbiokaDDD.Repository.MongoDB.Repositories
 {
@@ -12,6 +13,14 @@ namespace AbiokaDDD.Repository.MongoDB.Repositories
     {
         public BoardRepository(IMongoDBContext mongoDBContext, IPropertyHelper propertyHelper)
             : base(mongoDBContext, propertyHelper) {
+        }
+
+        public void AddCard(Guid boardId, Guid listId, Card card) {
+            var cardMongoDB = card.ToCardMongoDB();
+            cardMongoDB.SetDefault();
+            var update = Builders<BoardMongoDB>.Update.Push(b => b.Lists.ElementAt(-1).Cards, cardMongoDB);
+            Collection.UpdateOne(b => b.Id == boardId && b.Lists.Any(l => l.Id == listId), update);
+            card.Id = cardMongoDB.Id;
         }
 
         public void AddList(Guid boardId, List list) {
