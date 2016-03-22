@@ -1,10 +1,12 @@
 ﻿using AbiokaDDD.Domain;
 using AbiokaDDD.Infrastructure.Common.Domain;
+using MongoDB.Bson.Serialization.Attributes;
 using System;
 using System.Collections.Generic;
 
 namespace AbiokaDDD.Repository.MongoDB.DatabaseObjects
 {
+    [BsonIgnoreExtraElements]
     internal class BoardMongoDB : IdMongoEntity<Guid>
     {
         public string Name { get; set; }
