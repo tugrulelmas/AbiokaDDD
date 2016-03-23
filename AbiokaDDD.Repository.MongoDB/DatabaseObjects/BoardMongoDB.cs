@@ -11,7 +11,7 @@ namespace AbiokaDDD.Repository.MongoDB.DatabaseObjects
     {
         public string Name { get; set; }
 
-        public List<ListMongoDB> Lists { get; set; }
+        public IEnumerable<ListMongoDB> Lists { get; set; }
 
         public override IEntity ToDomainObject() {
             var result = new Board

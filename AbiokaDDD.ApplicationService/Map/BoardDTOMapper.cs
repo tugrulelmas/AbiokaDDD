@@ -1,6 +1,7 @@
 ﻿using AbiokaDDD.ApplicationService.DTOs;
 using AbiokaDDD.Domain;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace AbiokaDDD.ApplicationService.Map
 {
@@ -11,7 +12,7 @@ namespace AbiokaDDD.ApplicationService.Map
             {
                 Id = board.Id,
                 Name = board.Name,
-                Lists = board.Lists.ToDTOs()
+                Lists = board.Lists.ToDTOs().ToList()
             };
             return result;
         }
@@ -28,7 +29,7 @@ namespace AbiokaDDD.ApplicationService.Map
             {
                 Id = dto.Id,
                 Name = dto.Name,
-                Lists = dto.Lists.ToDomainObject()
+                Lists = dto.Lists.ToDomainObject().ToList()
             };
             return result;
         }
@@ -53,7 +54,7 @@ namespace AbiokaDDD.ApplicationService.Map
             {
                 Id = list.Id,
                 Name = list.Name,
-                Cards = list.Cards.ToDomainObject()
+                Cards = list.Cards.ToDomainObject().ToList()
             };
             return result;
         }
@@ -76,7 +77,7 @@ namespace AbiokaDDD.ApplicationService.Map
             {
                 Id = list.Id,
                 Name = list.Name,
-                Cards = list.Cards.ToDTOs()
+                Cards = list.Cards.ToDTOs().ToList()
             };
             return result;
         }
@@ -99,7 +100,7 @@ namespace AbiokaDDD.ApplicationService.Map
             {
                 Id = card.Id,
                 Title = card.Title,
-                Comments = card.Comments.ToDomainObject()
+                Comments = card.Comments.ToDomainObject().ToList()
             };
             return result;
         }
@@ -122,7 +123,7 @@ namespace AbiokaDDD.ApplicationService.Map
             {
                 Id = card.Id,
                 Title = card.Title,
-                Comments = card.Comments.ToDTOs()
+                Comments = card.Comments.ToDTOs().ToList()
             };
             return result;
         }

@@ -6,9 +6,9 @@ namespace AbiokaDDD.Repository.MongoDB.DatabaseObjects
     {
         public string Name { get; set; }
 
-        public List<CardMongoDB> Cards { get; set; }
+        public IEnumerable<CardMongoDB> Cards { get; set; }
 
-        public List<CommentMongoDB> Comments { get; set; }
+        public IEnumerable<CommentMongoDB> Comments { get; set; }
 
         public override void SetDefault() {
             base.SetDefault();

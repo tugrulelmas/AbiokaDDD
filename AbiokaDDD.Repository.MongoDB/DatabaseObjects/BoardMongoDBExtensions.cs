@@ -12,17 +12,14 @@ namespace AbiokaDDD.Repository.MongoDB.DatabaseObjects
                 return null;
 
             var comments = new List<CommentMongoDB>();
-            var cards = new List<Card>();
             foreach (var card in list.Cards)
             {
                 if(card.Id == Guid.Empty)
                 {
                     card.Id = Guid.NewGuid();
                 }
-                cards.Add(card);
                 comments.AddRange(card.Comments.ToMongoDBs(card.Id));
             }
-            list.Cards = cards;
 
             var listMongoDB =  new ListMongoDB
             {
@@ -53,7 +50,7 @@ namespace AbiokaDDD.Repository.MongoDB.DatabaseObjects
             {
                 Id = list.Id,
                 Name = list.Name,
-                Cards = list.Cards.ToCards(list.Comments)
+                Cards = list.Cards.ToCards(list.Comments).ToList()
             };
         }
 
@@ -75,7 +72,7 @@ namespace AbiokaDDD.Repository.MongoDB.DatabaseObjects
             {
                 Id = card.Id,
                 Title = card.Title,
-                Comments = comments.Where(c=>c.CardId == card.Id).ToComments()
+                Comments = comments.Where(c=>c.CardId == card.Id).ToComments().ToList()
             };
         }
 
