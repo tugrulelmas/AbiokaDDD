@@ -6,9 +6,9 @@ namespace AbiokaDDD.Domain.Repositories
 {
     public interface IBoardRepository : IRepository<Board>
     {
-        IEnumerable<Board> GetBoards(bool includeList);
+        IEnumerable<Board> GetBoards(bool includeList, bool includeComments);
 
-        Board GetBoard(Guid id, bool includeLists);
+        Board GetBoard(Guid id, bool includeLists, bool includeComments);
 
         void AddList(Guid boardId, List list);
 

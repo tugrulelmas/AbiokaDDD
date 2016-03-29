@@ -7,5 +7,7 @@ namespace AbiokaDDD.ApplicationService.Messaging
         public Guid BoardId { get; set; }
 
         public bool IncludeList { get; set; }
+
+        public bool IncludeComments { get; set; }
     }
 }

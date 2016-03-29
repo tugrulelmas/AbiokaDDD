@@ -72,7 +72,7 @@ namespace AbiokaDDD.Repository.MongoDB.DatabaseObjects
             {
                 Id = card.Id,
                 Title = card.Title,
-                Comments = comments.Where(c=>c.CardId == card.Id).ToComments().ToList()
+                Comments = comments?.Where(c=>c.CardId == card.Id).ToComments().ToList()
             };
         }
 

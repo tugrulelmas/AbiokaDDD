@@ -36,22 +36,29 @@ namespace AbiokaDDD.Repository.MongoDB.Repositories
             list.Id = listMongoDB.Id;
         }
 
-        public Board GetBoard(Guid id, bool includeList) {
+        public Board GetBoard(Guid id, bool includeList, bool includeComments) {
             var query = Collection.Find(b => b.Id == id);
             if (!includeList)
             {
                 query = query.Project<BoardMongoDB>(Builders<BoardMongoDB>.Projection.Exclude(b => b.Lists));
             }
-
+            if (!includeComments)
+            {
+                query = query.Project<BoardMongoDB>(Builders<BoardMongoDB>.Projection.Exclude("Lists.Comments"));
+            }
             var board = query.FirstOrDefault();
             return (Board)board.ToDomainObject();
         }
 
-        public IEnumerable<Board> GetBoards(bool includeList) {
+        public IEnumerable<Board> GetBoards(bool includeList, bool includeComments) {
             var query = Collection.Find(_ => true);
             if (!includeList)
             {
                 query = query.Project<BoardMongoDB>(Builders<BoardMongoDB>.Projection.Exclude(b => b.Lists));
+            }
+            if (!includeComments)
+            {
+                query = query.Project<BoardMongoDB>(Builders<BoardMongoDB>.Projection.Exclude("Lists.Comments"));
             }
 
             var list = query.ToList();
