@@ -105,5 +105,16 @@ namespace AbiokaDDD.ApplicationService.Implementations
                 Label = label.ToDTO()
             };
         }
+
+        public DeleteCommentResponse DeleteComment(DeleteCommentRequest request) {
+            var comment = new Comment
+            {
+                Id = request.CommentId
+            };
+
+            boardRepository.DeleteComment(request.BoardId, request.ListId, request.CardId, comment);
+
+            return new DeleteCommentResponse();
+        }
     }
 }

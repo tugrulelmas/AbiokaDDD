@@ -7,23 +7,26 @@ using System.Collections.Generic;
 namespace AbiokaDDD.Repository.MongoDB.DatabaseObjects
 {
     [BsonIgnoreExtraElements]
-    internal class BoardMongoDB : IdMongoEntity<Guid>
+    internal class BoardMongoDB : MongoEntity
     {
         public string Name { get; set; }
 
         public IEnumerable<ListMongoDB> Lists { get; set; }
 
-        public override IEntity ToDomainObject() {
-            var result = new Board
-            {
-                Id = this.Id,
-                Name = this.Name,
-                Lists = Lists.ToLists()
-            };
-            return result;
+        public override void CopyToDomainObject(IEntity entity) {
+            if (entity == null)
+                entity = new Board();
+
+            var board = (Board)entity;
+            board.Id = this.Id;
+            board.Name = this.Name;
+            board.Lists = Lists.ToLists();
         }
 
         public override void SetDefault() {
+            if (Lists == null)
+                return;
+
             foreach (var listItem in Lists)
             {
                 listItem.SetDefault();

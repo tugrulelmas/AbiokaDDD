@@ -48,6 +48,8 @@
     <Compile Include="DTOs\ListDTO.cs" />
     <Compile Include="Implementations\BoardService.cs" />
     <Compile Include="Map\BoardDTOMapper.cs" />
+    <Compile Include="Messaging\DeleteCommentResponse.cs" />
+    <Compile Include="Messaging\DeleteCommentRequest.cs" />
     <Compile Include="Messaging\AddLabelResponse.cs" />
     <Compile Include="Messaging\AddLabelRequest.cs" />
     <Compile Include="Messaging\GetCardResponse.cs" />

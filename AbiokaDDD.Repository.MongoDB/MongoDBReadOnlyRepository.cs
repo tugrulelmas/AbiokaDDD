@@ -6,8 +6,8 @@ using System.Collections.Generic;
 
 namespace AbiokaDDD.Repository.MongoDB
 {
-    internal abstract class MongoDBReadOnlyRepository<T, TDBObject, TId> : IReadOnlyRepository<T>
-        where TDBObject : IIdMongoEntity<TId>
+    internal abstract class MongoDBReadOnlyRepository<T, TDBObject> : IReadOnlyRepository<T>
+        where TDBObject : IMongoEntity
         where T : IEntity
     {
         private readonly IMongoDBContext mongoDBContext;
@@ -16,13 +16,15 @@ namespace AbiokaDDD.Repository.MongoDB
             this.mongoDBContext = mongoDBContext;
         }
 
-        protected virtual T FindById(TId id) {
-            var result = Collection.Find(b => b.Id.Equals(id))
+        protected virtual T FindById(Guid id) {
+            var mongoResult = Collection.Find(b => b.Id.Equals(id))
                 .FirstOrDefault();
-            if (result == null)
+            if (mongoResult == null)
                 return default(T);
 
-            return (T)result.ToDomainObject();
+            T result = default(T);
+            mongoResult.CopyToDomainObject(result);
+            return result;
         }
 
         public virtual IEnumerable<T> GetAll() {
@@ -31,12 +33,14 @@ namespace AbiokaDDD.Repository.MongoDB
 
             foreach (var item in list)
             {
-                yield return (T)item.ToDomainObject();
+                T result = default(T);
+                item.CopyToDomainObject(result);
+                yield return result;
             }
         }
 
         public virtual T FindById(object id) {
-            return FindById((TId)id);
+            return FindById((Guid)id);
         }
 
         protected IMongoCollection<TDBObject> Collection { get { return mongoDBContext.GetCollection<TDBObject>(); } }

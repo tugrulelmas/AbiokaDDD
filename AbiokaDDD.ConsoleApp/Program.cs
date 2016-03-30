@@ -38,6 +38,10 @@ namespace AbiokaDDD.ConsoleApp
             var addBoardResponse = boardService.AddBoard(addBoardRequest);
             Console.WriteLine($"Added board with id {addBoardResponse.Board.Id}");
 
+
+            boardService.DeleteComment(new DeleteCommentRequest { BoardId = addBoardResponse.Board.Id, ListId = addBoardResponse.Board.Lists.First().Id, CardId = addBoardResponse.Board.Lists.First().Cards.First().Id, CommentId = addBoardResponse.Board.Lists.First().Cards.First().Comments.First().Id });
+            Console.WriteLine($"Deleted comment with id {addBoardResponse.Board.Lists.First().Cards.First().Comments.First().Id }");
+
             boardService.DeleteBoard(addBoardResponse.Board.Id);
             Console.WriteLine($"Deleted board with id {addBoardResponse.Board.Id}");
 

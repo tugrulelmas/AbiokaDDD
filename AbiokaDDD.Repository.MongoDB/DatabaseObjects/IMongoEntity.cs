@@ -5,25 +5,20 @@ using System;
 
 namespace AbiokaDDD.Repository.MongoDB.DatabaseObjects
 {
-    internal abstract class IdMongoEntity<TId> : IIdMongoEntity<TId>
+    internal abstract class MongoEntity : IMongoEntity
     {
         [BsonId(IdGenerator = typeof(GuidGenerator))]
-        public TId Id { get; set; }
+        public Guid Id { get; set; }
 
-        public abstract IEntity ToDomainObject();
+        public abstract void CopyToDomainObject(IEntity entity);
 
         public abstract void SetDefault();
     }
 
-    internal interface IIdMongoEntity<TId> : IMongoEntity
-    {
-        TId Id { get; set; }
-
-        IEntity ToDomainObject();
-    }
-
     internal interface IMongoEntity
     {
+        Guid Id { get; set; }
+        void CopyToDomainObject(IEntity entity);
         void SetDefault();
     }
 

@@ -17,5 +17,7 @@ namespace AbiokaDDD.Domain.Repositories
         void AddComment(Guid boardId, Guid listId, Guid cardId, Comment comment);
 
         void AddLabel(Guid boardId, Guid listId, Guid cardId, Label label);
+
+        void DeleteComment(Guid boardId, Guid listId, Guid cardId, Comment comment);
     }
 }

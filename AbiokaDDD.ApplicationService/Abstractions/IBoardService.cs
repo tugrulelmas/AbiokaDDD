@@ -22,5 +22,7 @@ namespace AbiokaDDD.ApplicationService.Abstractions
         DeleteBoardResponse DeleteBoard(Guid id);
 
         UpdateBoardResponse UpdateBoard(UpdateBoardRequest request);
+
+        DeleteCommentResponse DeleteComment(DeleteCommentRequest request);
     }
 }

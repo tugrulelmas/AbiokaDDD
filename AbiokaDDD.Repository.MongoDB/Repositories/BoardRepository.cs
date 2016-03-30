@@ -9,7 +9,7 @@ using System.Linq;
 
 namespace AbiokaDDD.Repository.MongoDB.Repositories
 {
-    internal class BoardRepository : MongoDBRepository<Board, BoardMongoDB, Guid>, IBoardRepository
+    internal class BoardRepository : MongoDBRepository<Board, BoardMongoDB>, IBoardRepository
     {
         public BoardRepository(IMongoDBContext mongoDBContext, IPropertyHelper propertyHelper)
             : base(mongoDBContext, propertyHelper) {
@@ -27,6 +27,11 @@ namespace AbiokaDDD.Repository.MongoDB.Repositories
             var update = Builders<BoardMongoDB>.Update.Push(b => b.Lists.ElementAt(-1).Comments, commentMongoDB);
             Collection.UpdateOne(b => b.Id == boardId && b.Lists.Any(l => l.Id == listId), update);
             comment.Id = commentMongoDB.Id;
+        }
+
+        public void DeleteComment(Guid boardId, Guid listId, Guid cardId, Comment comment) {
+            var update = Builders<BoardMongoDB>.Update.PullFilter(b => b.Lists.ElementAt(-1).Comments, c => c.Id == comment.Id);
+            Collection.UpdateOne(b => b.Id == boardId && b.Lists.Any(l => l.Id == listId), update);
         }
 
         public void AddLabel(Guid boardId, Guid listId, Guid cardId, Label label) {
@@ -53,8 +58,10 @@ namespace AbiokaDDD.Repository.MongoDB.Repositories
             {
                 query = query.Project<BoardMongoDB>(Builders<BoardMongoDB>.Projection.Exclude("Lists.Comments"));
             }
-            var board = query.FirstOrDefault();
-            return (Board)board.ToDomainObject();
+            var boardMongoDB = query.FirstOrDefault();
+            var result = new Board();
+            boardMongoDB.CopyToDomainObject(result);
+            return result;
         }
 
         public IEnumerable<Board> GetBoards(bool includeList, bool includeComments) {
@@ -72,7 +79,9 @@ namespace AbiokaDDD.Repository.MongoDB.Repositories
 
             foreach (var item in list)
             {
-                yield return (Board)item.ToDomainObject();
+                var board = new Board();
+                item.CopyToDomainObject(board);
+                yield return board;
             }
         }
     }

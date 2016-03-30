@@ -26,12 +26,14 @@ namespace DDDTest.Repository.MongoDB.DatabaseObjects
         }
 
         private static BoardMongoDB ToBoardMongoDB(Board board) {
-            return new BoardMongoDB
+            var result = new BoardMongoDB
             {
                 Id = board.Id,
                 Name = board.Name,
                 Lists = board.Lists?.ToListMongoDBs().ToList()
             };
+            result.SetDefault();
+            return result;
         }
     }
 }
