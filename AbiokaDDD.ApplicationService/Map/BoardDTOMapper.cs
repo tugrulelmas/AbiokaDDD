@@ -100,7 +100,8 @@ namespace AbiokaDDD.ApplicationService.Map
             {
                 Id = card.Id,
                 Title = card.Title,
-                Comments = card.Comments.ToDomainObject().ToList()
+                Comments = card.Comments.ToDomainObject().ToList(),
+                Labels = card.Labels.ToDomainObject().ToList()
             };
             return result;
         }
@@ -123,7 +124,8 @@ namespace AbiokaDDD.ApplicationService.Map
             {
                 Id = card.Id,
                 Title = card.Title,
-                Comments = card.Comments.ToDTOs().ToList()
+                Comments = card.Comments.ToDTOs().ToList(),
+                Labels = card.Labels.ToDTOs().ToList()
             };
             return result;
         }
@@ -177,6 +179,50 @@ namespace AbiokaDDD.ApplicationService.Map
                 yield break;
 
             foreach (var item in comments)
+            {
+                yield return item.ToDTO();
+            }
+        }
+
+        public static Label ToDomainObject(this LabelDTO label) {
+            if (label == null)
+                return null;
+
+            var result = new Label
+            {
+                Id = label.Id,
+                Name = label.Name
+            };
+            return result;
+        }
+
+        private static IEnumerable<Label> ToDomainObject(this IEnumerable<LabelDTO> labels) {
+            if (labels == null)
+                yield break;
+
+            foreach (var item in labels)
+            {
+                yield return item.ToDomainObject();
+            }
+        }
+
+        public static LabelDTO ToDTO(this Label label) {
+            if (label == null)
+                return null;
+
+            var result = new LabelDTO
+            {
+                Id = label.Id,
+                Name = label.Name,
+            };
+            return result;
+        }
+
+        private static IEnumerable<LabelDTO> ToDTOs(this IEnumerable<Label> labels) {
+            if (labels == null)
+                yield break;
+
+            foreach (var item in labels)
             {
                 yield return item.ToDTO();
             }

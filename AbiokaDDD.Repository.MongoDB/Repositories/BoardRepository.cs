@@ -29,6 +29,13 @@ namespace AbiokaDDD.Repository.MongoDB.Repositories
             comment.Id = commentMongoDB.Id;
         }
 
+        public void AddLabel(Guid boardId, Guid listId, Guid cardId, Label label) {
+            var labelMongoDB = label.ToLabelMongoDB(cardId);
+            var update = Builders<BoardMongoDB>.Update.Push(b => b.Lists.ElementAt(-1).Labels, labelMongoDB);
+            Collection.UpdateOne(b => b.Id == boardId && b.Lists.Any(l => l.Id == listId), update);
+            label.Id = labelMongoDB.Id;
+        }
+
         public void AddList(Guid boardId, List list) {
             var listMongoDB = list.ToListMongoDB();
             var update = Builders<BoardMongoDB>.Update.Push(b => b.Lists, listMongoDB);

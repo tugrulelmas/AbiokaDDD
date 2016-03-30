@@ -95,5 +95,15 @@ namespace AbiokaDDD.ApplicationService.Implementations
             };
             return result;
         }
+
+        public AddLabelResponse AddLabel(AddLabelRequest request) {
+            var label = request.Label.ToDomainObject();
+            boardRepository.AddLabel(request.BoardId, request.ListId, request.CardId, label);
+
+            return new AddLabelResponse
+            {
+                Label = label.ToDTO()
+            };
+        }
     }
 }

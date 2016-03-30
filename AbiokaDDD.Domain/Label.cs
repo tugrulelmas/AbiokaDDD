@@ -4,13 +4,9 @@ using System.Collections.Generic;
 
 namespace AbiokaDDD.Domain
 {
-    public class Card : IdEntity<Guid>
+    public class Label : IdEntity<Guid>
     {
-        public string Title { get; set; }
-
-        public IEnumerable<Comment> Comments { get; set; }
-
-        public IEnumerable<Label> Labels { get; set; }
+        public string Name { get; set; }
 
         public override void Validate() {
             throw new NotImplementedException();

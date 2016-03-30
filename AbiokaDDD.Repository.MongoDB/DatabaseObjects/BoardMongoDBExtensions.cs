@@ -12,6 +12,7 @@ namespace AbiokaDDD.Repository.MongoDB.DatabaseObjects
                 return null;
 
             var comments = new List<CommentMongoDB>();
+            var labels = new List<LabelMongoDB>();
             foreach (var card in list.Cards)
             {
                 if(card.Id == Guid.Empty)
@@ -19,6 +20,7 @@ namespace AbiokaDDD.Repository.MongoDB.DatabaseObjects
                     card.Id = Guid.NewGuid();
                 }
                 comments.AddRange(card.Comments.ToMongoDBs(card.Id));
+                labels.AddRange(card.Labels.ToMongoDBs(card.Id));
             }
 
             var listMongoDB =  new ListMongoDB
@@ -26,7 +28,8 @@ namespace AbiokaDDD.Repository.MongoDB.DatabaseObjects
                 Id = list.Id,
                 Name = list.Name,
                 Cards = list.Cards?.ToMongoDBs().ToList(),
-                Comments = comments
+                Comments = comments,
+                Labels = labels
             };
             listMongoDB.SetDefault();
             return listMongoDB;
@@ -50,7 +53,7 @@ namespace AbiokaDDD.Repository.MongoDB.DatabaseObjects
             {
                 Id = list.Id,
                 Name = list.Name,
-                Cards = list.Cards.ToCards(list.Comments).ToList()
+                Cards = list.Cards.ToCards(list.Comments, list.Labels).ToList()
             };
         }
 
@@ -64,7 +67,7 @@ namespace AbiokaDDD.Repository.MongoDB.DatabaseObjects
             }
         }
 
-        private static Card ToCard(this CardMongoDB card, IEnumerable<CommentMongoDB> comments) {
+        private static Card ToCard(this CardMongoDB card, IEnumerable<CommentMongoDB> comments, IEnumerable<LabelMongoDB> labels) {
             if (card == null)
                 return null;
 
@@ -72,17 +75,18 @@ namespace AbiokaDDD.Repository.MongoDB.DatabaseObjects
             {
                 Id = card.Id,
                 Title = card.Title,
-                Comments = comments?.Where(c=>c.CardId == card.Id).ToComments().ToList()
+                Comments = comments?.Where(c=>c.CardId == card.Id).ToComments().ToList(),
+                Labels = labels?.Where(c => c.CardId == card.Id).ToLabels().ToList(),
             };
         }
 
-        private static IEnumerable<Card> ToCards(this IEnumerable<CardMongoDB> cards, IEnumerable<CommentMongoDB> comments) {
+        private static IEnumerable<Card> ToCards(this IEnumerable<CardMongoDB> cards, IEnumerable<CommentMongoDB> comments, IEnumerable<LabelMongoDB> labels) {
             if (cards == null)
                 yield break;
 
             foreach (var item in cards)
             {
-                yield return item.ToCard(comments);
+                yield return item.ToCard(comments, labels);
             }
         }
 
@@ -151,6 +155,51 @@ namespace AbiokaDDD.Repository.MongoDB.DatabaseObjects
             foreach (var item in comments)
             {
                 yield return item.ToComment();
+            }
+        }
+
+        public static LabelMongoDB ToLabelMongoDB(this Label label, Guid cardId) {
+            if (label == null)
+                return null;
+
+            var result = new LabelMongoDB
+            {
+                Id = label.Id,
+                CardId = cardId,
+                Name  = label.Name
+            };
+            result.SetDefault();
+            return result;
+        }
+
+        private static IEnumerable<LabelMongoDB> ToMongoDBs(this IEnumerable<Label> label, Guid cardId) {
+            if (label == null)
+                yield break;
+
+            foreach (var item in label)
+            {
+                yield return item.ToLabelMongoDB(cardId);
+            }
+        }
+
+        private static Label ToLabel(this LabelMongoDB label) {
+            if (label == null)
+                return null;
+
+            return new Label
+            {
+                Id = label.Id,
+                Name = label.Name
+            };
+        }
+
+        private static IEnumerable<Label> ToLabels(this IEnumerable<LabelMongoDB> labels) {
+            if (labels == null)
+                yield break;
+
+            foreach (var item in labels)
+            {
+                yield return item.ToLabel();
             }
         }
     }

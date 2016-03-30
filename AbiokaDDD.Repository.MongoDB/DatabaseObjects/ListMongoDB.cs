@@ -10,6 +10,8 @@ namespace AbiokaDDD.Repository.MongoDB.DatabaseObjects
 
         public IEnumerable<CommentMongoDB> Comments { get; set; }
 
+        public IEnumerable<LabelMongoDB> Labels { get; set; }
+
         public override void SetDefault() {
             base.SetDefault();
 

@@ -42,11 +42,14 @@
   <ItemGroup>
     <Compile Include="Abstractions\IBoardService.cs" />
     <Compile Include="Bootstrapper.cs" />
+    <Compile Include="DTOs\LabelDTO.cs" />
     <Compile Include="DTOs\CommentDTO.cs" />
     <Compile Include="DTOs\CardDTO.cs" />
     <Compile Include="DTOs\ListDTO.cs" />
     <Compile Include="Implementations\BoardService.cs" />
     <Compile Include="Map\BoardDTOMapper.cs" />
+    <Compile Include="Messaging\AddLabelResponse.cs" />
+    <Compile Include="Messaging\AddLabelRequest.cs" />
     <Compile Include="Messaging\GetCardResponse.cs" />
     <Compile Include="Messaging\GetCardRequest.cs" />
     <Compile Include="Messaging\AddCommentResponse.cs" />

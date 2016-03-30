@@ -41,6 +41,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Board.cs" />
+    <Compile Include="Label.cs" />
     <Compile Include="Card.cs" />
     <Compile Include="Comment.cs" />
     <Compile Include="List.cs" />

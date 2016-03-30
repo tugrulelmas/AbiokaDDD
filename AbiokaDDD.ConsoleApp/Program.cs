@@ -27,7 +27,8 @@ namespace AbiokaDDD.ConsoleApp
                             Cards = new List<CardDTO> {
                                 new CardDTO {
                                     Title = "Doing",
-                                    Comments = new List<CommentDTO> { new CommentDTO { Text = "Hadi bakalım" } }
+                                    Comments = new List<CommentDTO> { new CommentDTO { Text = "Hadi bakalım" } },
+                                    Labels = new List<LabelDTO> { new LabelDTO { Name = "Ayrabolu" } }
                                 }
                             }
                         }
@@ -66,6 +67,10 @@ namespace AbiokaDDD.ConsoleApp
                 var comment = new CommentDTO { Text = $"Yapariz - {DateTime.Now}" };
                 var addCommentResponse = boardService.AddComment(new AddCommentRequest { BoardId = updateResponse.Board.Id, ListId = addListResponse.List.Id, CardId = addCardResponse.Card.Id, Comment = comment });
                 Console.WriteLine($"Added Comment Board Id: {updateResponse.Board.Id}, List Id: {addListResponse.List.Id}, Card Id: {addCardResponse.Card.Id}, Comment Id: {addCommentResponse.Comment.Id}");
+
+                var label = new LabelDTO { Name = $"Ayrabolu - {DateTime.Now}" };
+                var addLabelResponse = boardService.AddLabel(new AddLabelRequest { BoardId = updateResponse.Board.Id, ListId = addListResponse.List.Id, CardId = addCardResponse.Card.Id, Label = label });
+                Console.WriteLine($"Added Label Board Id: {updateResponse.Board.Id}, List Id: {addListResponse.List.Id}, Card Id: {addCardResponse.Card.Id}, Label Id: {addLabelResponse.Label.Id}");
 
                 var cardResponse = boardService.GetCard(new GetCardRequest { BoardId = updateResponse.Board.Id, ListId = addListResponse.List.Id, CardId = addCardResponse.Card.Id });
             }

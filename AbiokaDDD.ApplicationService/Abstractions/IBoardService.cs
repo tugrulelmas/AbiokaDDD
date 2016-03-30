@@ -15,6 +15,8 @@ namespace AbiokaDDD.ApplicationService.Abstractions
 
         AddCommentResponse AddComment(AddCommentRequest request);
 
+        AddLabelResponse AddLabel(AddLabelRequest request);
+
         GetCardResponse GetCard(GetCardRequest request);
 
         DeleteBoardResponse DeleteBoard(Guid id);

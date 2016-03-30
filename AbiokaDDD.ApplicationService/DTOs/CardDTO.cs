@@ -10,5 +10,7 @@ namespace AbiokaDDD.ApplicationService.DTOs
         public string Title { get; set; }
 
         public IEnumerable<CommentDTO> Comments { get; set; }
+
+        public IEnumerable<LabelDTO> Labels { get; set; }
     }
 }
