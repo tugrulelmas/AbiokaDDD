@@ -66,6 +66,8 @@ namespace AbiokaDDD.ConsoleApp
                 var comment = new CommentDTO { Text = $"Yapariz - {DateTime.Now}" };
                 var addCommentResponse = boardService.AddComment(new AddCommentRequest { BoardId = updateResponse.Board.Id, ListId = addListResponse.List.Id, CardId = addCardResponse.Card.Id, Comment = comment });
                 Console.WriteLine($"Added Comment Board Id: {updateResponse.Board.Id}, List Id: {addListResponse.List.Id}, Card Id: {addCardResponse.Card.Id}, Comment Id: {addCommentResponse.Comment.Id}");
+
+                var cardResponse = boardService.GetCard(new GetCardRequest { BoardId = updateResponse.Board.Id, ListId = addListResponse.List.Id, CardId = addCardResponse.Card.Id });
             }
             else
             {

@@ -4,6 +4,7 @@ using AbiokaDDD.ApplicationService.Messaging;
 using AbiokaDDD.Domain;
 using AbiokaDDD.Domain.Repositories;
 using System;
+using System.Linq;
 
 namespace AbiokaDDD.ApplicationService.Implementations
 {
@@ -22,7 +23,6 @@ namespace AbiokaDDD.ApplicationService.Implementations
                 Board = board?.ToDTO()
             };
             return result;
-
         }
 
         public AddBoardResponse AddBoard(AddBoardRequest request) {
@@ -84,6 +84,16 @@ namespace AbiokaDDD.ApplicationService.Implementations
             {
                 Comment = comment.ToDTO()
             };
+        }
+
+        public GetCardResponse GetCard(GetCardRequest request) {
+            var board = boardRepository.GetBoard(request.BoardId, true, true);
+            var card = board.Lists.FirstOrDefault(l => l.Id == request.ListId)?.Cards.FirstOrDefault(c => c.Id == request.CardId);
+            var result = new GetCardResponse
+            {
+                Card = card?.ToDTO()
+            };
+            return result;
         }
     }
 }
