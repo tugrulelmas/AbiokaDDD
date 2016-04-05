@@ -15,6 +15,7 @@ namespace AbiokaDDD.Repository.MongoDB
         public MongoDBContext() {
             collectionNames = new Dictionary<RuntimeTypeHandle, string>();
             collectionNames.Add(typeof(BoardMongoDB).TypeHandle, "board");
+            collectionNames.Add(typeof(UserMongoDB).TypeHandle, "user");
             database = new Lazy<IMongoDatabase>(() => SetDatabase());
         }
 

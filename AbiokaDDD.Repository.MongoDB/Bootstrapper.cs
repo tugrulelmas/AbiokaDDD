@@ -10,6 +10,7 @@ namespace AbiokaDDD.Repository.MongoDB
         public static void Initialise() {
             DependencyContainer.Container.RegisterSingleton(typeof(IMongoDBContext), typeof(MongoDBContext));
             DependencyContainer.Container.RegisterSingleton(typeof(IBoardRepository), typeof(BoardRepository));
+            DependencyContainer.Container.RegisterSingleton(typeof(IUserRepository), typeof(UserRepository));
             DependencyContainer.Container.RegisterSingleton(typeof(IPropertyHelper), typeof(PropertyHelper));
         }
     }

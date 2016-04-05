@@ -12,7 +12,11 @@ namespace AbiokaDDD.ConsoleApp
     {
         static void Main(string[] args) {
             Bootstrapper.Initialise();
+            TestUser();
+            Console.ReadLine();
+        }
 
+        private static void TestBoard() {
             var boardService = DependencyContainer.Container.Resolve<IBoardService>();
 
             var addBoardRequest = new AddBoardRequest
@@ -82,7 +86,19 @@ namespace AbiokaDDD.ConsoleApp
             {
                 Console.WriteLine($"Board couldn't be found.");
             }
-            Console.ReadLine();
+        }
+
+        private static void TestUser() {
+            var userService = DependencyContainer.Container.Resolve<IUserService>();
+            var signUpRequest = new SignUpRequest
+            {
+                Email = "tugrulelmas@gmail.com",
+                Name = "Tuğrul Elmas",
+                ImageUrl = "a.png",
+                Password = "1234"
+            };
+            var signUpResponse = userService.SignUp(signUpRequest);
+            Console.WriteLine($"Added user with id {signUpResponse.User.Id}");
         }
     }
 }

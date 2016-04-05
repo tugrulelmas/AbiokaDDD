@@ -62,6 +62,7 @@
     <Compile Include="DatabaseObjects\IMongoEntity.cs" />
     <Compile Include="DatabaseObjects\CardMongoDB.cs" />
     <Compile Include="DatabaseObjects\ListMongoDB.cs" />
+    <Compile Include="DatabaseObjects\UserMongoDB.cs" />
     <Compile Include="Helper\IPropertyHelper.cs" />
     <Compile Include="Helper\PropertyHelper.cs" />
     <Compile Include="IMongoDBContext.cs" />
@@ -70,6 +71,7 @@
     <Compile Include="MongoDBRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\BoardRepository.cs" />
+    <Compile Include="Repositories\UserRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

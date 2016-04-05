@@ -41,13 +41,17 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Abstractions\IBoardService.cs" />
+    <Compile Include="Abstractions\IUserService.cs" />
     <Compile Include="Bootstrapper.cs" />
     <Compile Include="DTOs\LabelDTO.cs" />
     <Compile Include="DTOs\CommentDTO.cs" />
     <Compile Include="DTOs\CardDTO.cs" />
     <Compile Include="DTOs\ListDTO.cs" />
+    <Compile Include="DTOs\UserDTO.cs" />
     <Compile Include="Implementations\BoardService.cs" />
+    <Compile Include="Implementations\UserService.cs" />
     <Compile Include="Map\BoardDTOMapper.cs" />
+    <Compile Include="Map\UserDTOMapper.cs" />
     <Compile Include="Messaging\DeleteCommentResponse.cs" />
     <Compile Include="Messaging\DeleteCommentRequest.cs" />
     <Compile Include="Messaging\AddLabelResponse.cs" />
@@ -67,6 +71,8 @@
     <Compile Include="Messaging\GetBoardByIdResponse.cs" />
     <Compile Include="Messaging\ServiceRequestBase.cs" />
     <Compile Include="Messaging\ServiceResponseBase.cs" />
+    <Compile Include="Messaging\SignUpResponse.cs" />
+    <Compile Include="Messaging\SignUpRequest.cs" />
     <Compile Include="Messaging\UpdateBoardRequest.cs" />
     <Compile Include="Messaging\UpdateBoardResponse.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

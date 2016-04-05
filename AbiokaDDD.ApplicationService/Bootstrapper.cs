@@ -10,6 +10,7 @@ namespace AbiokaDDD.ApplicationService
             Repository.MongoDB.Bootstrapper.Initialise();
 
             DependencyContainer.Container.RegisterSingleton(typeof(IBoardService), typeof(BoardService));
+            DependencyContainer.Container.RegisterSingleton(typeof(IUserService), typeof(UserService));
         }
     }
 }
